@@ -1,0 +1,12 @@
+---
+- hosts: ubuntu@172.31.47.60
+
+  tasks:
+    - name: deploy regapp on kubernetes
+      command: kubectl apply -f hello-app-deployment.yaml
+
+    - name: create service for regapp
+      command: kubectl apply -f hello-app-service.yaml
+
+    - name: update deployment with new pods if image updated in docker hub
+      command: kubectl rollout restart deployment.apps/hijackhim-hello-app

@@ -1,0 +1,14 @@
+- hosts: ubuntu@172.31.81.222
+  user: root
+
+  tasks:
+    - name: create docker image
+      command: docker build -t hello:latest .
+      args:
+        chdir: /opt/docker
+
+    - name: create tag to push image onto dockerhub
+      command: docker tag hello:latest himanshuofficial123/hello:latest
+
+    - name: push docker image onto dockerhub
+      command: docker push himanshuofficial123/hello:latest
